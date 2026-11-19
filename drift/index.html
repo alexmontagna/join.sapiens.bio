@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nobody leaves your life. They drift. · Sapiens</title>
+<meta name="description" content="150 lights orbit you. Scroll, and the years pull them away; tap one, and it comes back. Sapiens keeps your people in orbit.">
+<link rel="canonical" href="https://join.sapiens.bio/drift/">
+<meta name="theme-color" content="#05070e" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#05070e" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sapiens">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://join.sapiens.bio/drift/">
+<meta property="og:title" content="Nobody leaves your life. They drift.">
+<meta property="og:description" content="150 lights orbit you. Scroll, and the years pull them away; tap one, and it comes back. Sapiens keeps your people in orbit.">
+<meta property="og:image" content="https://join.sapiens.bio/drift/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A night sky of 150 lights in orbit around you, with the words: Nobody leaves your life. They drift.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nobody leaves your life. They drift.">
+<meta name="twitter:description" content="150 lights orbit you. Scroll, and the years pull them away; tap one, and it comes back. Sapiens keeps your people in orbit.">
+<meta name="twitter:image" content="https://join.sapiens.bio/drift/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one fixed night sky of 150 lights (Dunbar's layers 5 · 15 · 50 · 150) behind a single column of text that scrolls over it.
+   Wide screens: text keeps to the left, the orbit sits right. Narrow screens: the orbit sits up top, text panels scroll over it. */
+:root {
+  --night: #05070e;
+  --night-2: #0b1022;
+  --ink: #eef0f7;
+  --ink-dim: #b3b9cc;
+  --ink-faint: #737b97;
+  --leaf: #86dc8f;
+  --leaf-deep: #3f9d55;
+  --thirst: #c28a55;
+  --ember: #f4cf86;
+  --panel: rgba(7, 10, 22, 0.72);
+  --line: rgba(238, 240, 247, 0.13);
+  --f-display: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --f-body: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --gutter-l: max(20px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(20px, env(safe-area-inset-right, 0px));
+  color-scheme: dark;
+}
+html { background: var(--night); }
+body {
+  background: var(--night);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+#sky { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; touch-action: pan-y; cursor: crosshair; }
+.scrim { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, transparent 0 45%, rgba(5,7,14,.55) 70%, rgba(5,7,14,.85) 100%); }
+@media (min-width: 960px) {
+  .scrim { background: linear-gradient(90deg, rgba(5,7,14,.92) 0, rgba(5,7,14,.7) 34%, rgba(5,7,14,0) 58%); }
+}
+
+.page { position: relative; z-index: 2; pointer-events: none; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+.page a, .page button, .panel, .topbar, .hero__copy { pointer-events: auto; }
+.wrap { max-width: 1240px; margin: 0 auto; }
+.col { max-width: 560px; }
+
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: max(18px, env(safe-area-inset-top, 0px)) 0; }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-family: var(--f-display); font-size: 26px; letter-spacing: 0.01em; -webkit-user-select: none; user-select: none; }
+.brand svg { width: 26px; height: 26px; }
+.topbar__link { color: var(--ink-dim); font-size: 14px; text-decoration: none; border-bottom: 1px solid var(--line); padding-block: 6px; -webkit-user-select: none; user-select: none; }
+.topbar__link:hover { color: var(--ink); border-color: var(--ink-dim); }
+
+.hud { position: fixed; z-index: 3; right: calc(var(--gutter-r)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: flex; gap: 14px; align-items: center; font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--ink-dim);
+  background: rgba(7,10,22,.78); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; pointer-events: none; -webkit-user-select: none; user-select: none;
+  font-variant-numeric: tabular-nums; }
+.hud b { color: var(--ink); font-weight: 500; }
+.hud .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: 1px; }
+.hud .dot--in { background: var(--leaf); box-shadow: 0 0 8px var(--leaf); }
+.hud .dot--out { background: var(--thirst); }
+@media (max-width: 600px) { .hud { left: var(--gutter-l); right: var(--gutter-r); justify-content: space-between; border-radius: 14px; transition: opacity .3s, transform .3s; }
+  .hud.is-tucked { opacity: 0; transform: translateY(12px); } }
+
+/* Hero */
+.hero { min-height: min(100svh, 980px); display: grid; align-content: end; padding-block: 0 96px; }
+.hero__copy { max-width: 640px; }
+@media (min-width: 960px) { .hero { align-content: center; padding-block: 40px 80px; } }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ember); margin: 0 0 18px; }
+h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(54px, 10.5vw, 136px); line-height: 0.95; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+h1 em { font-style: italic; color: var(--thirst); }
+h1 em.saved { color: var(--leaf); transition: color 1.2s; }
+.lede { font-size: clamp(18px, 2.1vw, 21px); color: var(--ink-dim); max-width: 34em; margin: 26px 0 0; text-wrap: pretty; }
+.lede strong { color: var(--ink); font-weight: 500; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 24px; border-radius: 999px; font: 500 16px/1 var(--f-body); text-decoration: none; cursor: pointer; border: 1px solid transparent; -webkit-user-select: none; user-select: none; transition: transform .2s, background .2s; }
+.btn--primary { background: var(--ink); color: var(--night); }
+.btn--primary:hover { background: #fff; transform: translateY(-1px); }
+.btn--ghost { color: var(--ink); border-color: rgba(238,240,247,.28); background: rgba(7,10,22,.5); }
+.btn--ghost:hover { border-color: var(--ink); }
+.btn:focus-visible, .topbar__link:focus-visible, .brand:focus-visible, .finale__pull:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+.hint { margin-top: 26px; font-family: var(--f-mono); font-size: 12.5px; letter-spacing: 0.04em; color: var(--ink-faint); display: flex; gap: 10px; align-items: center; -webkit-user-select: none; user-select: none; }
+.hint i { width: 8px; height: 8px; border-radius: 50%; background: var(--thirst); box-shadow: 0 0 10px var(--thirst); flex: none; animation: pulse 2.2s ease-in-out infinite; }
+.hint output { color: var(--leaf); }
+@keyframes pulse { 50% { opacity: .35; } }
+
+/* Sections */
+section.chapter { padding-block: 72px; }
+@media (min-width: 960px) { section.chapter { padding-block: 120px; } }
+.kicker { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 14px; display: flex; gap: 12px; align-items: center; }
+.kicker::before { content: ""; width: 26px; height: 1px; background: currentColor; }
+h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(40px, 6.2vw, 78px); line-height: 0.98; letter-spacing: -0.015em; margin: 0 0 22px; text-wrap: balance; }
+h2 em { font-style: italic; color: var(--leaf); }
+h2 em.brown { color: var(--thirst); }
+.chapter p.body { color: var(--ink-dim); margin: 0 0 18px; max-width: 34em; text-wrap: pretty; }
+
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 26px 24px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+@media (min-width: 960px) { .panel { padding: 32px; } }
+.panel + .panel { margin-top: 14px; }
+
+.facts { display: grid; gap: 14px; margin-top: 30px; }
+.fact { display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; align-items: baseline; }
+.fact__n { font-family: var(--f-display); font-size: clamp(54px, 8vw, 76px); line-height: .9; color: var(--ember); font-variant-numeric: lining-nums; grid-row: span 2; min-width: 2.2ch; }
+.fact__t { color: var(--ink); font-size: 17px; margin: 0; }
+.fact__src { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .03em; color: var(--ink-faint); margin: 0; }
+
+.laws { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 14px; }
+.law { display: grid; grid-template-columns: 44px 1fr; gap: 0 16px; }
+.law__mark { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; }
+.law__mark svg { width: 22px; height: 22px; }
+.law h3 { font: 500 18px/1.3 var(--f-body); margin: 8px 0 6px; color: var(--ink); }
+.law p { margin: 0; color: var(--ink-dim); font-size: 16px; }
+
+.rings { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 28px 0 8px; }
+.ring { text-align: left; border-top: 1px solid var(--line); padding-top: 12px; }
+.ring b { display: block; font-family: var(--f-display); font-weight: 400; font-size: clamp(38px, 5vw, 54px); line-height: 1; color: var(--ink); }
+.ring span { font-size: 13.5px; color: var(--ink-dim); line-height: 1.35; display: block; margin-top: 6px; }
+@media (max-width: 420px) { .rings { grid-template-columns: repeat(2, 1fr); row-gap: 18px; } }
+
+.promise { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 0; }
+.promise li { display: flex; gap: 14px; align-items: baseline; padding: 14px 0; border-top: 1px solid var(--line); color: var(--ink); }
+.promise li span { font-family: var(--f-mono); font-size: 12px; color: var(--leaf); letter-spacing: .08em; text-transform: uppercase; min-width: 5.5em; }
+.promise li p { margin: 0; color: var(--ink-dim); }
+
+.finale { padding-block: 90px 150px; text-align: left; }
+.finale h2 { font-size: clamp(52px, 9vw, 120px); }
+.finale__pull { margin-top: 10px; background: none; border: 1px dashed rgba(134,220,143,.55); color: var(--leaf); font: 500 15px/1 var(--f-mono); letter-spacing: .04em; border-radius: 999px; min-height: 48px; padding: 0 22px; cursor: pointer; -webkit-user-select: none; user-select: none; }
+.finale__pull:hover { background: rgba(134,220,143,.08); }
+.footer { border-top: 1px solid var(--line); padding-block: 26px calc(90px + env(safe-area-inset-bottom, 0px)); display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 13.5px; color: var(--ink-faint); pointer-events: auto; }
+.footer a { color: var(--ink-dim); text-decoration: none; -webkit-user-select: none; user-select: none; }
+.footer a:hover { color: var(--ink); }
+.footer .sources { flex-basis: 100%; font-family: var(--f-mono); font-size: 11.5px; line-height: 1.6; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .hint i { animation: none; } .btn { transition: none; } }
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="scrim" aria-hidden="true"></div>
+
+<div class="hud is-tucked" aria-hidden="true">
+  <span><span id="hud-year">2026</span></span>
+  <span><i class="dot dot--in"></i><b id="hud-in">150</b> in orbit</span>
+  <span><i class="dot dot--out"></i><b id="hud-out">0</b> drifting</span>
+</div>
+
+<div class="page">
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="https://sapiens.bio" referrerpolicy="no-referrer-when-downgrade" aria-label="Sapiens home">
+        <svg viewBox="1 2 20 20" aria-hidden="true"><path d="M10.9 20C6.9 19.7 4 18 4 15C4 11.6 6.3 8.4 10.4 6.4C13.8 4.6 16.4 3.9 19.6 2C20.5 4.9 21 7.4 21 9.9C21 15.4 16.8 19.7 10.9 20Z" fill="#86dc8f"/><path d="M4.015 15.373C4.137 15.276 4.265 15.185 4.4 15.1C7.1 13.4 11.2 12.9 13.2 11.7C16.2 9.9 18.3 5.3 19.6 2C20.5 4.9 21 7.4 21 9.9C21 15.4 16.8 19.7 10.9 20C6.9 19.7 4 18 4 15Z" fill="#000" opacity=".22"/><path d="M2 21C2 18.6 2.5 16.3 4.4 15.1C7.1 13.4 11.2 12.9 13.2 11.7" fill="none" stroke="#2c6b3a" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Sapiens
+      </a>
+      <a class="topbar__link" href="https://sapiens.bio" referrerpolicy="no-referrer-when-downgrade">I have an invitation</a>
+    </header>
+
+    <section class="hero" aria-labelledby="h1">
+      <div class="hero__copy">
+        <p class="eyebrow">Relationships, 2026</p>
+        <h1 id="h1">Nobody leaves your life. They <em id="drift-word">drift.</em></h1>
+        <p class="lede">No fight, no goodbye. A month without a call becomes a year, and a year becomes a stranger. <strong>Sapiens is the gravity that keeps your people in orbit.</strong></p>
+        <div class="ctas">
+          <a class="btn btn--primary" href="https://sapiens.bio/?waitlist" referrerpolicy="no-referrer-when-downgrade">Join the waiting list</a>
+          <a class="btn btn--ghost" href="https://sapiens.bio" referrerpolicy="no-referrer-when-downgrade">I have an invitation</a>
+        </div>
+        <p class="hint"><i></i><span>Tap a fading light to pull it back. <output id="saved-count" aria-live="polite"></output></span></p>
+      </div>
+    </section>
+
+    <section class="chapter" data-phase="drift" aria-labelledby="h-physics">
+      <div class="col">
+        <div class="panel">
+          <p class="kicker">The quiet physics</p>
+          <h2 id="h-physics">Every year, the lights get a little <em class="brown">farther.</em></h2>
+          <p class="body">Keep scrolling and watch the sky. Nobody in it did anything wrong. Life got full, and there was no one to remind you.</p>
+          <div class="facts">
+            <div class="fact"><span class="fact__n">1 in 6</span><p class="fact__t">people on Earth are lonely.</p><p class="fact__src">WHO Commission on Social Connection, June 2025</p></div>
+            <div class="fact"><span class="fact__n">4×</span><p class="fact__t">as many Americans say they have no close friend as in 1990: 12%, up from 3%.</p><p class="fact__src">Survey Center on American Life, 2021</p></div>
+            <div class="fact"><span class="fact__n">7 yrs</span><p class="fact__t">is about how long it takes for half of your personal network to be replaced.</p><p class="fact__src">G. Mollenhorst, Utrecht University, 2009</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" data-phase="care" aria-labelledby="h-gravity">
+      <div class="col">
+        <div class="panel">
+          <p class="kicker">Sapiens is gravity</p>
+          <h2 id="h-gravity">It notices the drift <em>before you do.</em></h2>
+          <p class="body">Sapiens is a personal relationship manager. It works on your own from the first day, with nobody else on board.</p>
+          <ul class="laws">
+            <li class="law">
+              <span class="law__mark" aria-hidden="true"><svg viewBox="1 2 20 20"><path d="M10.9 20C6.9 19.7 4 18 4 15C4 11.6 6.3 8.4 10.4 6.4C13.8 4.6 16.4 3.9 19.6 2C20.5 4.9 21 7.4 21 9.9C21 15.4 16.8 19.7 10.9 20Z" fill="#c28a55"/><path d="M2 21C2 18.6 2.5 16.3 4.4 15.1C7.1 13.4 11.2 12.9 13.2 11.7" fill="none" stroke="#6f4a2a" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+              <div><h3>The leaf turns brown</h3><p>Every Moment you log (a coffee, a call, a walk) restarts that person's clock. A card gone quiet turns its leaf brown and asks for water.</p></div>
+            </li>
+            <li class="law">
+              <span class="law__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#f4cf86" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8.5" stroke-dasharray="2 3"/></svg></span>
+              <div><h3>Your Orbit, on one map</h3><p>Everyone around you, sorted by Life Area (Family, Social, Work, Services), by city, age or language.</p></div>
+            </li>
+            <li class="law">
+              <span class="law__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#eef0f7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg></span>
+              <div><h3>Every birthday, ahead of time</h3><p>Faces, birthdays, family ties, the city they live in and the languages they speak, on one living card. Bring them from Google in one click, or add them by hand.</p></div>
+            </li>
+            <li class="law">
+              <span class="law__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#86dc8f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5M9 3h6l-1 6 3 4H7l3-4z"/></svg></span>
+              <div><h3>Pins that ring</h3><p>Someone needs you this month? Pin them. A high pin reminds you once on your phone, a top pin twice.</p></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" data-phase="dunbar" aria-labelledby="h-dunbar">
+      <div class="col">
+        <div class="panel">
+          <p class="kicker">Built for 150, not 5,000</p>
+          <h2 id="h-dunbar">Your mind holds about <em>150 people.</em></h2>
+          <p class="body">Anthropologist Robin Dunbar found that we keep our relationships in layers. The sky behind this page holds exactly that many lights.</p>
+          <div class="rings">
+            <div class="ring"><b>5</b><span>you'd call at 3 a.m.</span></div>
+            <div class="ring"><b>15</b><span>close friends</span></div>
+            <div class="ring"><b>50</b><span>good friends</span></div>
+            <div class="ring"><b>150</b><span>you'd greet by name</span></div>
+          </div>
+          <p class="body">Social networks gave you thousands of followers and kept none of these. Sapiens is made for the 150.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" data-phase="together" aria-labelledby="h-together">
+      <div class="col">
+        <div class="panel">
+          <p class="kicker">When they join</p>
+          <h2 id="h-together">Two orbits <em>become one world.</em></h2>
+          <p class="body">Sapiens is invitation-only. When someone you keep joins, they wear their own face on your card, and you can talk one to one.</p>
+          <ul class="laws">
+            <li class="law">
+              <span class="law__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#eef0f7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20l1.3-5A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+              <div><h3>Write to exactly these people</h3><p>A post to just your family, your students, this city. Or a broadcast to a whole circle.</p></div>
+            </li>
+            <li class="law">
+              <span class="law__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#f4cf86" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M9 14l2 2 4-4"/></svg></span>
+              <div><h3>Plans with a who</h3><p>Events with a when and a where, checklists with a job per person.</p></div>
+            </li>
+            <li class="law">
+              <span class="law__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#86dc8f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><path d="M9 12h6" stroke-dasharray="1.5 2"/></svg></span>
+              <div><h3>Introductions, asked first</h3><p>When two of your people should meet, Sapiens suggests it to you. Nothing is sent until you say so.</p></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" aria-labelledby="h-promise">
+      <div class="col">
+        <div class="panel">
+          <p class="kicker">The promise</p>
+          <h2 id="h-promise">Your people are <em>not a product.</em></h2>
+          <ul class="promise">
+            <li><span>Never</span><p>Advertising, or advertising identifiers.</p></li>
+            <li><span>Never</span><p>Selling or renting your data.</p></li>
+            <li><span>Never</span><p>Training AI on your data.</p></li>
+            <li><span>Always</span><p>Export everything in one click. Deleting your account really deletes it.</p></li>
+            <li><span>Always</span><p>Your contacts stay yours. Other members never see them.</p></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="finale" aria-labelledby="h-finale">
+      <div class="col">
+        <h2 id="h-finale">Bring them <em>back.</em></h2>
+        <p class="lede">Open your door to Sapiens. A member can invite you today, or you can wait for a place.</p>
+        <div class="ctas">
+          <a class="btn btn--primary" href="https://sapiens.bio/?waitlist" referrerpolicy="no-referrer-when-downgrade">Join the waiting list</a>
+          <a class="btn btn--ghost" href="https://sapiens.bio" referrerpolicy="no-referrer-when-downgrade">I have an invitation</a>
+        </div>
+        <p style="margin-top:22px"><button class="finale__pull" id="pull-all" type="button">Pull all 150 back into orbit</button></p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <a href="https://sapiens.bio/privacy" referrerpolicy="no-referrer-when-downgrade">Privacy</a>
+      <a href="https://sapiens.bio/terms" referrerpolicy="no-referrer-when-downgrade">Terms</a>
+      <p class="sources">Sources: WHO Commission on Social Connection, “From loneliness to social connection” (30 June 2025) · Survey Center on American Life, American Perspectives Survey (May 2021) · G. Mollenhorst, “Networks in contexts”, Utrecht University (2009) · R. Dunbar, “How Many Friends Does One Person Need?” (2010). The people in the sky are invented.</p>
+    </footer>
+  </div>
+</div>
+
+<script>
+(() => {
+  const canvas = document.getElementById("sky");
+  const ctx = canvas.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hudYear = document.getElementById("hud-year");
+  const hudIn = document.getElementById("hud-in");
+  const hudOut = document.getElementById("hud-out");
+  const savedOut = document.getElementById("saved-count");
+  const driftWord = document.getElementById("drift-word");
+
+  // Dunbar's layers: 5, then 10 more (15), 35 more (50), 100 more (150).
+  const LAYERS = [
+    { n: 5, r: 0.2, size: 3.6, rate: 0.6 },
+    { n: 10, r: 0.38, size: 2.9, rate: 0.8 },
+    { n: 35, r: 0.62, size: 2.2, rate: 1 },
+    { n: 100, r: 0.95, size: 1.55, rate: 1.25 },
+  ];
+  const INNER = ["Mom", "Ana · sister", "Tomás · best friend", "Kenji · since school", "Lena · cousin"];
+  const CLOSE = ["Priya", "Jonas", "Grandpa Leo", "Amara", "Sofia · godmother", "Ravi", "Elif", "Bruno", "Hana", "Malik"];
+  const GOOD = ["Clara", "Diego", "Yuki", "Nadia", "Felix", "Mira", "Omar", "Ines", "Theo", "June", "Rafael", "Ivy", "Kai", "Lucia", "Ben", "Rosa", "Ezra", "Maya", "Otto", "Lila", "Noah", "Zoe", "Sam", "Ada", "Leo", "Iris", "Paulo", "Greta", "Tariq", "Mei", "Hugo", "Nora", "Selin", "Arjun", "Vera"];
+  const FAR = ["a college roommate", "your first boss", "the neighbour with the dog", "a cousin's husband", "your old bandmate", "the barista who knew your order", "a friend from the exchange year", "your piano teacher", "the couple from the wedding", "a teammate from the five-a-side", "your childhood best friend", "the coworker who left in 2022", "a friend of a friend", "your landlord's daughter", "the climbing partner", "your aunt's neighbour"];
+
+  let rnd = 7;
+  const rand = () => (rnd = (rnd * 16807) % 2147483647) / 2147483647;
+
+  const people = [];
+  LAYERS.forEach((L, li) => {
+    for (let i = 0; i < L.n; i++) {
+      const name = li === 0 ? INNER[i] : li === 1 ? CLOSE[i] : li === 2 ? GOOD[i] : FAR[i % FAR.length];
+      let thirst = li === 0 ? 0.05 + rand() * 0.12 : li === 1 ? rand() * 0.45 : li === 2 ? rand() * 0.45 : 0.05 + rand() * 0.5;
+      if (name === "Tomás · best friend") thirst = 0.78;
+      if (name === "Grandpa Leo") thirst = 0.6;
+      people.push({
+        name, layer: li, named: li < 2,
+        R: L.r + (rand() - 0.5) * (li === 3 ? 0.14 : 0.08),
+        a: rand() * Math.PI * 2,
+        w: (0.045 / Math.sqrt(L.r)) * (rand() < 0.5 ? 1 : 0.85),
+        size: L.size * (0.85 + rand() * 0.3),
+        rate: L.rate * (0.6 + rand() * 0.8),
+        t: thirst, rr: 0, x: 0, y: 0, flash: 0, label: 0,
+      });
+    }
+  });
+  const stars = Array.from({ length: 240 }, () => ({ x: rand(), y: rand(), r: rand() * 1.1 + 0.2, p: rand() * 6.28 }));
+
+  // Colour along thirst: leaf green → ember → brown → ash.
+  const STOPS = [[134, 220, 143], [222, 214, 130], [194, 138, 85], [110, 104, 112]];
+  const col = (t) => {
+    const s = Math.min(0.999, Math.max(0, t)) * (STOPS.length - 1);
+    const i = Math.floor(s), f = s - i, A = STOPS[i], B = STOPS[i + 1];
+    return [A[0] + (B[0] - A[0]) * f, A[1] + (B[1] - A[1]) * f, A[2] + (B[2] - A[2]) * f];
+  };
+  const SPRITES = [];
+  const SPRITE = 64;
+  for (let k = 0; k < 16; k++) {
+    const c = document.createElement("canvas");
+    c.width = c.height = SPRITE;
+    const g = c.getContext("2d");
+    const [r, gg, b] = col(k / 15);
+    const grad = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0, `rgba(${r|0},${gg|0},${b|0},0.9)`);
+    grad.addColorStop(0.25, `rgba(${r|0},${gg|0},${b|0},0.35)`);
+    grad.addColorStop(1, `rgba(${r|0},${gg|0},${b|0},0)`);
+    g.fillStyle = grad;
+    g.fillRect(0, 0, SPRITE, SPRITE);
+    SPRITES.push(c);
+  }
+
+  let W = 0, H = 0, DPR = 1, cx = 0, cy = 0, maxR = 0;
+  function resize() {
+    DPR = Math.min(2, window.devicePixelRatio || 1);
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    if (W >= 960) { cx = W * 0.7; cy = H * 0.5; maxR = Math.min(W * 0.27, H * 0.44); }
+    else if (W >= 600) { cx = W * 0.5; cy = H * 0.34; maxR = Math.min(W * 0.4, H * 0.3); }
+    else { cx = W * 0.5; cy = H * 0.3; maxR = Math.min(W * 0.44, H * 0.27); }
+  }
+  addEventListener("resize", resize, { passive: true });
+  resize();
+
+  // Scroll drives the story: drift accelerates time, care pulls the inner rings home.
+  let phase = "rest", ringsLit = 0, year = 2026, saved = 0, pulling = 0;
+  const phases = [...document.querySelectorAll("[data-phase]")];
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) phase = e.target.dataset.phase;
+  }, { rootMargin: "-45% 0px -45% 0px" });
+  phases.forEach((p) => io.observe(p));
+  const hud = document.querySelector(".hud");
+  const onScroll = () => { if (scrollY < innerHeight * 0.5) phase = "rest"; hud.classList.toggle("is-tucked", scrollY < innerHeight * 0.6); };
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  function water(p) {
+    p.t = 0; p.flash = 1; p.label = 2.4; saved++;
+    savedOut.textContent = saved === 1 ? "1 person back in orbit." : `${saved} people back in orbit.`;
+    if (p.name.startsWith("Tomás")) driftWord.classList.add("saved");
+  }
+
+  function pick(x, y) {
+    let best = null, bestScore = Infinity;
+    for (const p of people) {
+      const d = Math.hypot(p.x - x, p.y - y);
+      if (d > 34) continue;
+      const score = d - p.t * 20;
+      if (score < bestScore) { bestScore = score; best = p; }
+    }
+    return best;
+  }
+  canvas.addEventListener("click", (e) => { const p = pick(e.clientX, e.clientY); if (p) water(p); });
+  let hover = null;
+  canvas.addEventListener("pointermove", (e) => { if (e.pointerType === "mouse") hover = pick(e.clientX, e.clientY); });
+  canvas.addEventListener("pointerleave", () => { hover = null; });
+  document.getElementById("pull-all").addEventListener("click", () => {
+    pulling = 1;
+    people.forEach((p, i) => setTimeout(() => { if (p.t > 0.05) { p.t = 0; p.flash = 1; } }, reduce ? 0 : i * 9));
+    saved = 150; savedOut.textContent = "All 150 back in orbit.";
+    driftWord.classList.add("saved");
+  });
+
+  let last = performance.now();
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    const speed = phase === "drift" ? 7 : phase === "rest" ? 1 : 0.8;
+    if (phase === "drift") year = Math.min(2033, year + dt * 0.9);
+    ringsLit += ((phase === "dunbar" ? 1 : 0.18) - ringsLit) * Math.min(1, dt * 3);
+
+    ctx.clearRect(0, 0, W, H);
+    // A faint warm well at the centre: the gravity.
+    const well = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 1.5);
+    well.addColorStop(0, "rgba(244,207,134,0.10)");
+    well.addColorStop(0.5, "rgba(60,80,160,0.05)");
+    well.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = well; ctx.fillRect(0, 0, W, H);
+
+    for (const s of stars) {
+      const tw = reduce ? 0.5 : 0.5 + 0.5 * Math.sin(now / 1400 + s.p);
+      ctx.fillStyle = `rgba(200,210,240,${0.12 + tw * 0.25})`;
+      ctx.beginPath(); ctx.arc(s.x * W, s.y * H, s.r, 0, 6.283); ctx.fill();
+    }
+
+    // Dunbar rings.
+    ctx.save();
+    ctx.setLineDash([2, 6]);
+    ctx.font = "500 11px 'Geist Mono', ui-monospace, monospace";
+    ["5", "15", "50", "150"].forEach((lab, i) => {
+      const r = LAYERS[i].r * maxR + (i === 3 ? 0.07 * maxR : 0.04 * maxR);
+      ctx.strokeStyle = `rgba(238,240,247,${0.05 + ringsLit * 0.22})`;
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, 6.283); ctx.stroke();
+      if (ringsLit > 0.3) {
+        ctx.fillStyle = `rgba(244,207,134,${(ringsLit - 0.3) * 1.2})`;
+        ctx.fillText(lab, cx + r * Math.cos(-1.1) + 4, cy + r * Math.sin(-1.1));
+      }
+    });
+    ctx.restore();
+
+    let out = 0;
+    for (const p of people) {
+      // Neglect: thirst rises on its own; time runs faster while the drift chapter is on screen.
+      let rate = 0.0035 * p.rate * speed;
+      if (phase === "care" && p.layer < 2) rate = -0.06; // Sapiens' nudges bring the inner rings home
+      p.t = Math.max(0, Math.min(1, p.t + rate * dt));
+      if (p.t > 0.5) out++;
+      const target = p.R * maxR * (1 + 2.1 * Math.pow(p.t, 1.6));
+      p.rr = p.rr ? p.rr + (target - p.rr) * Math.min(1, dt * (p.flash > 0 ? 2.6 : 1.2)) : target;
+      if (!reduce) p.a += p.w * dt * (1 - p.t * 0.6);
+      p.x = cx + p.rr * Math.cos(p.a);
+      p.y = cy + p.rr * Math.sin(p.a) * 0.92;
+      const alpha = 1 - p.t * 0.78;
+      const k = Math.round(p.t * 15);
+      const glow = p.size * (6 + (p.flash * 10));
+      ctx.globalAlpha = alpha;
+      ctx.drawImage(SPRITES[k], p.x - glow, p.y - glow, glow * 2, glow * 2);
+      const [r, g, b] = col(p.t);
+      ctx.fillStyle = `rgb(${r|0},${g|0},${b|0})`;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, 6.283); ctx.fill();
+      ctx.globalAlpha = 1;
+      if (p.flash > 0) {
+        const rr = (1 - p.flash) * 46;
+        ctx.strokeStyle = `rgba(134,220,143,${p.flash * 0.8})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(p.x, p.y, rr + p.size, 0, 6.283); ctx.stroke();
+        p.flash = Math.max(0, p.flash - dt * 0.9);
+      }
+      if (p.label > 0) p.label = Math.max(0, p.label - dt);
+    }
+
+    // You, at the centre.
+    const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, 34);
+    core.addColorStop(0, "rgba(255,248,230,1)");
+    core.addColorStop(0.18, "rgba(255,236,190,0.75)");
+    core.addColorStop(1, "rgba(255,220,150,0)");
+    ctx.fillStyle = core; ctx.beginPath(); ctx.arc(cx, cy, 34, 0, 6.283); ctx.fill();
+    ctx.font = "500 11px 'Geist Mono', ui-monospace, monospace";
+    ctx.fillStyle = "rgba(255,240,210,.8)";
+    ctx.textAlign = "center";
+    ctx.fillText("you", cx, cy + 26);
+
+    // Names: the drifting best friend always; anyone hovered or just watered.
+    ctx.textAlign = "left";
+    for (const p of people) {
+      const always = p.name.startsWith("Tomás") && p.t > 0.4;
+      if (!(always || p === hover || p.label > 0)) continue;
+      const txt = p.label > 0 ? `${p.name} · back in orbit` : p.t > 0.5 ? `${p.name} · drifting` : p.name;
+      ctx.font = "500 12px 'Geist Mono', ui-monospace, monospace";
+      const tw = ctx.measureText(txt).width;
+      let lx = p.x + 12, ly = p.y - 10;
+      if (lx + tw + 16 > W) lx = p.x - tw - 22;
+      ctx.fillStyle = "rgba(5,7,14,.82)";
+      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(lx - 7, ly - 13, tw + 14, 20, 10) : ctx.rect(lx - 7, ly - 13, tw + 14, 20); ctx.fill();
+      ctx.fillStyle = p.label > 0 ? "#86dc8f" : p.t > 0.5 ? "#e0a774" : "#eef0f7";
+      ctx.fillText(txt, lx, ly + 1);
+    }
+
+    hudYear.textContent = String(Math.floor(year));
+    hudOut.textContent = String(out);
+    hudIn.textContent = String(150 - out);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

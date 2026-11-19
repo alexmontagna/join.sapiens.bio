@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Loneliness takes 100 lives every hour. · Sapiens</title>
+<meta name="description" content="Sapiens is the treatment you keep in your pocket: read the leaflet, take as needed, keep within reach of the people you love.">
+<link rel="canonical" href="https://join.sapiens.bio/antidote/">
+<meta name="theme-color" content="#f3f6f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b141b" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sapiens">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://join.sapiens.bio/antidote/">
+<meta property="og:title" content="Loneliness takes 100 lives every hour.">
+<meta property="og:description" content="Sapiens is the treatment you keep in your pocket: read the leaflet, take as needed, keep within reach of the people you love.">
+<meta property="og:image" content="https://join.sapiens.bio/antidote/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A medicine box named Sapiens, with the words: Loneliness takes 100 lives every hour.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Loneliness takes 100 lives every hour.">
+<meta name="twitter:description" content="Sapiens is the treatment you keep in your pocket: read the leaflet, take as needed, keep within reach of the people you love.">
+<meta name="twitter:image" content="https://join.sapiens.bio/antidote/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: a pharmacy shelf. Wide screens: the copy and the package leaflet run down the left, the medicine box stays pinned on the right and turns as you read.
+   Narrow screens: the box sits in the hero and turns on its own; the leaflet follows as one column. Zero JavaScript on this page. */
+:root {
+  --paper: #f3f6f6;
+  --sheet: #fbfcfc;
+  --ink: #0e1c29;
+  --ink-2: #485868;
+  --rule: #cfd8dd;
+  --band: #17734a;
+  --band-ink: #0f5636;
+  --mint: #a8e6c1;
+  --alert: #0e1c29;
+  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --gl: max(18px, env(safe-area-inset-left, 0px));
+  --gr: max(18px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0b141b; --sheet: #111d26; --ink: #e8eff2; --ink-2: #9fb0bb; --rule: #23343f;
+    --band: #3fbf7f; --band-ink: #8fe0b4; --mint: #1f5a3f; --alert: #e8eff2; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0b141b; --sheet: #111d26; --ink: #e8eff2; --ink-2: #9fb0bb; --rule: #23343f;
+  --band: #3fbf7f; --band-ink: #8fe0b4; --mint: #1f5a3f; --alert: #e8eff2; color-scheme: dark;
+}
+body { background: var(--paper); color: var(--ink); font-family: var(--f-display); font-variation-settings: "wdth" 100; font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+.shell { padding-left: var(--gl); padding-right: var(--gr); }
+.frame { max-width: 1280px; margin: 0 auto; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; border-bottom: 2px solid var(--ink); }
+.mark { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 800; font-variation-settings: "wdth" 125; letter-spacing: .04em; font-size: 18px; -webkit-user-select: none; user-select: none; }
+.mark svg { width: 24px; height: 24px; }
+.top__right { display: flex; gap: 18px; align-items: center; font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.top__right a { color: var(--ink); text-decoration: none; border: 1.5px solid var(--ink); padding: 9px 14px; -webkit-user-select: none; user-select: none; }
+.top__right a:hover { background: var(--ink); color: var(--paper); }
+.top__date { display: none; }
+@media (min-width: 700px) { .top__date { display: inline; } }
+
+.layout { display: flex; flex-direction: column; }
+.layout > main { display: contents; }
+.hero { order: 1; } .aside { order: 2; } .warning { order: 3; } .leaflet { order: 4; } .slip { order: 5; }
+@media (min-width: 1000px) {
+  .layout { display: grid; gap: 0 56px; grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr); }
+  .layout > main { display: block; }
+}
+
+/* Hero */
+.hero { padding-block: 44px 36px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--band-ink); margin: 0 0 22px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.eyebrow b { background: var(--band); color: #fff; padding: 3px 8px; font-weight: 600; letter-spacing: .1em; }
+h1 { margin: 0; font-weight: 850; font-variation-settings: "wdth" 118; text-transform: uppercase; font-size: clamp(38px, 7.2vw, 96px); line-height: .9; letter-spacing: -.012em; text-wrap: balance; }
+h1 .num { color: var(--band); }
+.h1-src { font-family: var(--f-mono); font-size: 12px; color: var(--ink-2); margin: 16px 0 0; letter-spacing: .02em; }
+.lede { font-size: clamp(19px, 2vw, 23px); line-height: 1.45; margin: 28px 0 0; max-width: 31em; font-variation-settings: "wdth" 92; text-wrap: pretty; }
+.lede strong { font-weight: 750; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 24px; font: 700 15px/1 var(--f-display); font-variation-settings: "wdth" 112; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; border: 2px solid var(--ink); -webkit-user-select: none; user-select: none; transition: transform .15s, box-shadow .15s; }
+.btn--solid { background: var(--ink); color: var(--paper); box-shadow: 5px 5px 0 var(--band); }
+.btn--solid:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--band); }
+.btn--line { color: var(--ink); background: transparent; }
+.btn--line:hover { background: var(--sheet); }
+a:focus-visible { outline: 3px solid var(--band); outline-offset: 3px; }
+
+/* The box */
+.stage { --bw: clamp(240px, 64vw, 340px); --bh: calc(var(--bw) * .56); --bd: calc(var(--bw) * .23);
+  display: grid; place-items: center; padding-block: 40px 70px; perspective: 1100px; -webkit-user-select: none; user-select: none; }
+.stage > * { grid-area: 1 / 1; }
+@media (min-width: 1000px) {
+  .aside { position: relative; }
+  .stage { position: sticky; top: 0; height: 100svh; max-height: 900px; padding: 0; }
+}
+.box {
+  width: var(--bw); height: var(--bh); position: relative; transform-style: preserve-3d;
+  transform: rotateX(-16deg) rotateY(-30deg);
+  animation: spin 18s linear infinite;
+}
+@media (min-width: 1000px) { .stage { --bw: clamp(300px, 27vw, 390px); } }
+@keyframes spin { from { transform: rotateX(-16deg) rotateY(-30deg); } to { transform: rotateX(-16deg) rotateY(330deg); } }
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 1000px) {
+    .box { animation: spin linear both; animation-timeline: scroll(root block); }
+  }
+}
+@media (prefers-reduced-motion: reduce) { .box { animation: none !important; } }
+.shadow { width: calc(var(--bw) * 1.1); height: 40px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.26), transparent); transform: translateY(calc(var(--bh) * .82)); filter: blur(4px); }
+
+.face { position: absolute; box-sizing: border-box; overflow: hidden; background: #fdfefe; color: #0e1c29; border: 1px solid #d8e0e4; backface-visibility: hidden; -webkit-backface-visibility: hidden; font-family: var(--f-display); }
+.f-front, .f-back { width: var(--bw); height: var(--bh); }
+.f-front { transform: translateZ(calc(var(--bd) / 2)); }
+.f-back { transform: rotateY(180deg) translateZ(calc(var(--bd) / 2)); }
+.f-left, .f-right { width: var(--bd); height: var(--bh); left: calc((var(--bw) - var(--bd)) / 2); }
+.f-right { transform: rotateY(90deg) translateZ(calc(var(--bw) / 2)); }
+.f-left { transform: rotateY(-90deg) translateZ(calc(var(--bw) / 2)); }
+.f-top, .f-bottom { width: var(--bw); height: var(--bd); top: calc((var(--bh) - var(--bd)) / 2); }
+.f-top { transform: rotateX(90deg) translateZ(calc(var(--bh) / 2)); }
+.f-bottom { transform: rotateX(-90deg) translateZ(calc(var(--bh) / 2)); }
+
+.f-front { display: grid; grid-template-rows: auto 1fr auto; padding: calc(var(--bw) * .045) calc(var(--bw) * .05); }
+.f-front::before { content: ""; position: absolute; right: -12%; top: -40%; width: 52%; height: 180%; background: linear-gradient(100deg, #17734a 0 46%, #a8e6c1 46% 60%, transparent 60%); transform: rotate(18deg); }
+.pk-top { position: relative; display: flex; justify-content: space-between; align-items: center; font-family: var(--f-mono); font-size: calc(var(--bw) * .03); letter-spacing: .08em; text-transform: uppercase; }
+.pk-rx { background: #0e1c29; color: #fff; padding: .25em .55em; }
+.pk-name { position: relative; align-self: center; }
+.pk-name b { display: block; font-weight: 900; font-variation-settings: "wdth" 125; font-size: calc(var(--bw) * .118); letter-spacing: -.01em; line-height: .95; }
+.pk-name span { display: block; font-size: calc(var(--bw) * .036); font-variation-settings: "wdth" 90; color: #485868; margin-top: .35em; }
+.pk-dose { position: relative; display: flex; align-items: end; justify-content: space-between; font-size: calc(var(--bw) * .032); font-variation-settings: "wdth" 88; }
+.pk-dose strong { font-weight: 900; font-variation-settings: "wdth" 125; font-size: calc(var(--bw) * .085); line-height: .9; }
+.pk-leaf { position: absolute; right: calc(var(--bw) * .06); top: 50%; width: calc(var(--bw) * .17); transform: translateY(-58%); }
+
+.f-back { padding: calc(var(--bw) * .05); display: grid; grid-template-columns: 1fr auto; gap: 6%; align-items: end; font-size: calc(var(--bw) * .031); font-variation-settings: "wdth" 85; line-height: 1.35; }
+.f-back p { margin: 0 0 .5em; }
+.f-back h4 { margin: 0 0 .4em; font-weight: 800; font-variation-settings: "wdth" 115; text-transform: uppercase; letter-spacing: .04em; font-size: 1.05em; }
+.bars { width: calc(var(--bw) * .3); height: calc(var(--bh) * .42); background: repeating-linear-gradient(90deg, #0e1c29 0 2px, transparent 2px 4px, #0e1c29 4px 5px, transparent 5px 8px, #0e1c29 8px 11px, transparent 11px 12px); position: relative; }
+.bars::after { content: "2026 1116 0150"; position: absolute; left: 0; right: 0; bottom: -1.5em; text-align: center; font-family: var(--f-mono); font-size: .9em; letter-spacing: .1em; }
+.f-left, .f-right { display: grid; place-items: center; background: #17734a; color: #fff; border-color: #0f5636; }
+.f-left span, .f-right span { writing-mode: vertical-rl; transform: rotate(180deg); font-weight: 900; font-variation-settings: "wdth" 125; letter-spacing: .1em; font-size: calc(var(--bd) * .27); }
+.f-right { background: #fdfefe; color: #0e1c29; border-color: #d8e0e4; }
+.braille { font-size: calc(var(--bd) * .34); letter-spacing: .12em; color: #0e1c29; }
+.f-right span.braille { font-weight: 400; letter-spacing: .25em; }
+.f-top, .f-bottom { display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--bw) * .05); font-family: var(--f-mono); font-size: calc(var(--bw) * .03); letter-spacing: .08em; text-transform: uppercase; }
+.f-top { background: #a8e6c1; border-color: #8bd1a8; }
+
+/* Warning */
+.warning { margin-block: 18px 8px; border: 7px solid var(--alert); background: var(--sheet); padding: 22px 22px 18px; }
+.warning p { margin: 0; font-weight: 850; font-variation-settings: "wdth" 110; font-size: clamp(22px, 3vw, 34px); line-height: 1.08; text-transform: uppercase; letter-spacing: -.005em; text-wrap: balance; }
+.warning small { display: block; margin-top: 14px; font-family: var(--f-mono); font-size: 12px; color: var(--ink-2); letter-spacing: .02em; }
+
+/* The leaflet */
+.leaflet { margin-block: 44px 20px; background: var(--sheet); border: 1px solid var(--rule); position: relative; box-shadow: 0 1px 0 var(--rule), 0 18px 40px -28px rgba(0,0,0,.35); }
+.leaflet__head { padding: 26px 24px 20px; border-bottom: 2px solid var(--ink); }
+.leaflet__kind { font-family: var(--f-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 10px; }
+.leaflet h2 { margin: 0; font-weight: 850; font-variation-settings: "wdth" 120; font-size: clamp(26px, 3.6vw, 40px); line-height: 1; text-transform: uppercase; }
+.leaflet__sub { margin: 10px 0 0; font-variation-settings: "wdth" 80; font-size: 16px; color: var(--ink-2); }
+.leaflet__read { margin: 16px 0 0; font-variation-settings: "wdth" 80; font-size: 15px; font-weight: 600; }
+.toc { list-style: none; margin: 14px 0 0; padding: 0; counter-reset: toc; font-variation-settings: "wdth" 78; font-size: 15px; display: grid; gap: 2px; }
+.toc li { counter-increment: toc; display: flex; gap: 10px; }
+.toc li::before { content: counter(toc) "."; font-family: var(--f-mono); font-size: 13px; color: var(--band-ink); min-width: 1.5em; padding-top: 1px; }
+.leaflet__body { padding: 8px 24px 26px; font-variation-settings: "wdth" 78; font-size: 16px; line-height: 1.5; }
+.leaflet__body section { padding-top: 22px; break-inside: avoid; }
+.leaflet__body h3 { margin: 0 0 10px; display: flex; gap: 12px; align-items: baseline; font-weight: 800; font-variation-settings: "wdth" 110; font-size: 19px; line-height: 1.2; text-transform: uppercase; letter-spacing: .01em; }
+.leaflet__body h3 span { font-family: var(--f-mono); font-size: 14px; color: #fff; background: var(--band); padding: 2px 7px; font-weight: 600; flex: none; }
+.leaflet__body p { margin: 0 0 10px; }
+.leaflet__body ul { margin: 0 0 10px; padding-left: 1.1em; }
+.leaflet__body li { margin-bottom: 4px; }
+.leaflet__body li::marker { color: var(--band); }
+.leaflet__body strong { font-weight: 750; }
+@media (min-width: 1200px) { .leaflet__body { column-count: 2; column-gap: 40px; column-rule: 1px solid var(--rule); } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .leaflet__body section { animation: settle linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
+  }
+}
+@keyframes settle { from { opacity: .35; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+.freq { width: 100%; border-collapse: collapse; margin: 6px 0 12px; font-size: 15px; }
+.freq th { text-align: left; font-family: var(--f-mono); font-weight: 500; font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--band-ink); padding: 10px 0 4px; border-bottom: 1px solid var(--rule); }
+.freq th small { color: var(--ink-2); text-transform: none; letter-spacing: 0; }
+.freq td { padding: 4px 0 2px; vertical-align: top; }
+.footnote { font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-2); }
+
+/* Prescription slip */
+.slip { margin-block: 48px 30px; border: 2px solid var(--ink); background: var(--sheet); padding: 24px; position: relative; }
+.slip__rx { font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 125; font-size: 64px; line-height: .8; color: var(--band); -webkit-user-select: none; user-select: none; }
+.slip h2 { margin: 14px 0 18px; font-weight: 850; font-variation-settings: "wdth" 118; text-transform: uppercase; font-size: clamp(30px, 4.6vw, 56px); line-height: .95; text-wrap: balance; }
+.slip__lines { display: grid; gap: 12px; margin: 0 0 22px; font-variation-settings: "wdth" 85; }
+.slip__line { display: grid; grid-template-columns: 9.5em 1fr; gap: 10px; align-items: end; border-bottom: 1px dashed var(--rule); padding-bottom: 6px; }
+.slip__line dt { font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.slip__line dd { margin: 0; font-size: 18px; font-weight: 600; font-style: italic; }
+@media (max-width: 480px) { .slip__line { grid-template-columns: 1fr; gap: 2px; } }
+.slip__note { font-size: 16px; color: var(--ink-2); max-width: 34em; margin: 0; }
+
+.foot { border-top: 2px solid var(--ink); margin-top: 34px; padding-block: 20px calc(34px + env(safe-area-inset-bottom, 0px)); display: flex; flex-wrap: wrap; gap: 8px 22px; font-family: var(--f-mono); font-size: 12px; color: var(--ink-2); }
+.foot a { color: var(--ink); text-decoration: none; -webkit-user-select: none; user-select: none; }
+.foot p { flex-basis: 100%; margin: 6px 0 0; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="frame">
+    <header class="top">
+      <a class="mark" href="https://sapiens.bio" referrerpolicy="no-referrer-when-downgrade" aria-label="Sapiens home">
+        <svg viewBox="1 2 20 20" aria-hidden="true"><path d="M10.9 20C6.9 19.7 4 18 4 15C4 11.6 6.3 8.4 10.4 6.4C13.8 4.6 16.4 3.9 19.6 2C20.5 4.9 21 7.4 21 9.9C21 15.4 16.8 19.7 10.9 20Z" fill="#17734a"/><path d="M2 21C2 18.6 2.5 16.3 4.4 15.1C7.1 13.4 11.2 12.9 13.2 11.7" fill="none" stroke="#a8e6c1" stroke-width="1.5" stroke-linecap="round"/></svg>
+        SAPIENS
+      </a>
+      <div class="top__right"><span class="top__date">Leaflet rev. Nov 2026</span><a href="https://sapiens.bio" referrerpolicy="no-referrer-when-downgrade">I have an invitation</a></div>
+    </header>
+
+    <div class="layout">
+      <main>
+        <section class="hero" aria-labelledby="h1">
+          <p class="eyebrow"><b>Public health notice</b> Relationships, 2026</p>
+          <h1 id="h1">Loneliness takes <span class="num">100</span> lives every hour.</h1>
+          <p class="h1-src">About 871,000 deaths a year. World Health Organization, 30 June 2025.</p>
+          <p class="lede">Sapiens is the treatment you keep in your pocket: <strong>one place for the people who matter, and a daily habit that keeps them close.</strong> No ads. No feed of strangers. Available by invitation, like a prescription: a member writes you one.</p>
+          <div class="ctas">
+            <a class="btn btn--solid" href="https://sapiens.bio/?waitlist" referrerpolicy="no-referrer-when-downgrade">Join the waiting list</a>
+            <a class="btn btn--line" href="https://sapiens.bio" referrerpolicy="no-referrer-when-downgrade">I have an invitation</a>
+          </div>
+        </section>
+
+        <aside class="warning" aria-label="Health warning">
+          <p>Lacking social connection is as dangerous as smoking up to 15 cigarettes a day.</p>
+          <small>U.S. Surgeon General, “Our Epidemic of Loneliness and Isolation”, 2023</small>
+        </aside>
+
+        <article class="leaflet" aria-labelledby="h-leaflet">
+          <header class="leaflet__head">
+            <p class="leaflet__kind">Package leaflet: information for the user</p>
+            <h2 id="h-leaflet">Sapiens 150</h2>
+            <p class="leaflet__sub">Relationship care for the people you love. For daily use, on your phone, tablet or computer.</p>
+            <p class="leaflet__read">Read all of this leaflet before you start using Sapiens. Keep it: you may want to read it again.</p>
+            <ol class="toc">
+              <li>What Sapiens is and what it is used for</li>
+              <li>Before you use Sapiens</li>
+              <li>How to use Sapiens</li>
+              <li>Possible side effects</li>
+              <li>How to store Sapiens</li>
+              <li>Contents of the pack</li>
+            </ol>
+          </header>
+          <div class="leaflet__body">
+            <section>
+              <h3><span>1</span>What Sapiens is and what it is used for</h3>
+              <p>Sapiens is a <strong>personal relationship manager</strong>. It keeps every person who matters on one living card: their face, birthday, family ties, the city they live in and the languages they speak. It works on your own from the first day.</p>
+              <p>Sapiens is used to treat:</p>
+              <ul>
+                <li>friendships that drift without anyone deciding</li>
+                <li>birthdays remembered one day too late</li>
+                <li>“we should catch up soon” that never happens</li>
+                <li>family nobody can place on the tree</li>
+                <li>people scattered across cities and time zones</li>
+              </ul>
+            </section>
+            <section>
+              <h3><span>2</span>Before you use Sapiens</h3>
+              <p><strong>Do not use Sapiens</strong> if you are looking for followers, likes or strangers. It has none of them.</p>
+              <p>Sapiens contains no advertising. It does not sell or rent your data and does not train AI on it.</p>
+              <p><strong>Tell the people you love</strong> that you use Sapiens. It works alone, and better as they join: friends who join wear their own face on your card, and you can message them one to one.</p>
+            </section>
+            <section>
+              <h3><span>3</span>How to use Sapiens</h3>
+              <p><strong>The recommended dose</strong> is one Moment whenever something happens: a coffee, a call, a walk. Write it in one sentence. Sapiens keeps when and where.</p>
+              <p>Each Moment restarts that person's clock, and the leaf on their card stays green.</p>
+              <p><strong>If you forget a dose,</strong> the leaf turns brown and asks for water. Do not take a double dose. Just say hello.</p>
+              <p><strong>If someone needs you,</strong> pin them. A high pin reminds you once on your phone, a top pin twice.</p>
+              <p><strong>If you use more Sapiens than you should:</strong> no overdose is known.</p>
+            </section>
+            <section>
+              <h3><span>4</span>Possible side effects</h3>
+              <p>Like all good habits, Sapiens can cause side effects, although not everybody gets them.</p>
+              <table class="freq">
+                <tbody>
+                  <tr><th>Very common <small>(more than 1 in 10)</small></th></tr>
+                  <tr><td>Remembering a birthday before it happens. Knowing what you talked about last time.</td></tr>
+                  <tr><th>Common <small>(up to 1 in 10)</small></th></tr>
+                  <tr><td>Unexpected dinners. Being called back. A family tree that finally makes sense.</td></tr>
+                  <tr><th>Uncommon <small>(up to 1 in 100)</small></th></tr>
+                  <tr><td>Knowing the weather in your cousin's city before you call.</td></tr>
+                  <tr><th>Rare <small>(up to 1 in 1,000)</small></th></tr>
+                  <tr><td>A group chat that actually plans something.</td></tr>
+                  <tr><th>Very rare <small>(up to 1 in 10,000)</small></th></tr>
+                  <tr><td>Meeting a future best friend through two friends who already knew you both. Sapiens suggests the introduction and asks you first.</td></tr>
+                </tbody>
+              </table>
+              <p class="footnote">The frequencies follow the format of a real leaflet. The side effects are hopes, not clinical data.</p>
+            </section>
+            <section>
+              <h3><span>5</span>How to store Sapiens</h3>
+              <p><strong>Keep within reach of the people you love.</strong></p>
+              <p>Your data stays yours. Export everything in one click. Deleting your account really deletes it. Other members never see your contacts.</p>
+            </section>
+            <section>
+              <h3><span>6</span>Contents of the pack</h3>
+              <ul>
+                <li>1 Garden of Moments, Notes and Plans</li>
+                <li>1 Orbit map, with four Life Areas: Family, Social, Work, Services</li>
+                <li>Birthday reminders and Pins that ring</li>
+                <li>One-to-one Messages with members</li>
+                <li>Posts to exactly the people you choose</li>
+                <li>Plans with a who: events and checklists</li>
+                <li>Introductions, always asked first</li>
+              </ul>
+              <p><strong>Dispensed by:</strong> invitation only. <strong>This leaflet was last revised</strong> in November 2026.</p>
+            </section>
+          </div>
+        </article>
+
+        <section class="slip" aria-labelledby="h-slip">
+          <div class="slip__rx" aria-hidden="true">Rx</div>
+          <h2 id="h-slip">Ask someone who loves you for a prescription.</h2>
+          <dl class="slip__lines">
+            <div class="slip__line"><dt>Patient</dt><dd>You</dd></div>
+            <div class="slip__line"><dt>Rx</dt><dd>Sapiens 150, one Moment as often as life happens</dd></div>
+            <div class="slip__line"><dt>Prescribed by</dt><dd>A member who cares about you</dd></div>
+          </dl>
+          <p class="slip__note">Sapiens is invitation-only. If nobody has written you one yet, join the waiting list and we will open the door.</p>
+          <div class="ctas">
+            <a class="btn btn--solid" href="https://sapiens.bio/?waitlist" referrerpolicy="no-referrer-when-downgrade">Join the waiting list</a>
+            <a class="btn btn--line" href="https://sapiens.bio" referrerpolicy="no-referrer-when-downgrade">I have an invitation</a>
+          </div>
+        </section>
+      </main>
+
+      <div class="aside">
+        <div class="stage" aria-hidden="true">
+          <div class="shadow"></div>
+          <div class="box">
+            <div class="face f-front">
+              <div class="pk-top"><span>Relationship care</span><span class="pk-rx">By invitation</span></div>
+              <div class="pk-name"><b>Sapiens</b><span>for chronic disconnection</span></div>
+              <svg class="pk-leaf" viewBox="1 2 20 20"><path d="M10.9 20C6.9 19.7 4 18 4 15C4 11.6 6.3 8.4 10.4 6.4C13.8 4.6 16.4 3.9 19.6 2C20.5 4.9 21 7.4 21 9.9C21 15.4 16.8 19.7 10.9 20Z" fill="#fff"/><path d="M4.015 15.373C4.137 15.276 4.265 15.185 4.4 15.1C7.1 13.4 11.2 12.9 13.2 11.7C16.2 9.9 18.3 5.3 19.6 2C20.5 4.9 21 7.4 21 9.9C21 15.4 16.8 19.7 10.9 20C6.9 19.7 4 18 4 15Z" fill="#a8e6c1"/><path d="M2 21C2 18.6 2.5 16.3 4.4 15.1C7.1 13.4 11.2 12.9 13.2 11.7" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>
+              <div class="pk-dose"><span><strong>150</strong> people</span><span>1 Moment, as needed</span></div>
+            </div>
+            <div class="face f-back">
+              <div><h4>Keep within reach of the people you love.</h4><p>No ads. No data sold. No AI trained on you.</p><p>Lot 2026 · EXP never</p></div>
+              <div class="bars"></div>
+            </div>
+            <div class="face f-left"><span>SAPIENS 150</span></div>
+            <div class="face f-right"><span class="braille" lang="en-Brai">⠎⠁⠏⠊⠑⠝⠎</span></div>
+            <div class="face f-top"><span>Sapiens 150</span><span>Daily use</span></div>
+            <div class="face f-bottom"><span>Made for people</span><span>not followers</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="foot">
+      <a href="https://sapiens.bio/privacy" referrerpolicy="no-referrer-when-downgrade">Privacy</a>
+      <a href="https://sapiens.bio/terms" referrerpolicy="no-referrer-when-downgrade">Terms</a>
+      <p>Sources: World Health Organization, Commission on Social Connection report, 30 June 2025 (1 in 6 people lonely; about 871,000 deaths a year, about 100 an hour) · U.S. Surgeon General's Advisory, “Our Epidemic of Loneliness and Isolation”, 2023. Sapiens is an app, not a medicine; this page borrows the shape of a medicine box to say what it treats.</p>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How many more times will you see them? · Sapiens</title>
+<meta name="description" content="Type who, their age and how often you meet, and see the number of times left, one dot each. Sapiens makes the next one count.">
+<link rel="canonical" href="https://join.sapiens.bio/times-left/">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0e0d" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sapiens">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://join.sapiens.bio/times-left/">
+<meta property="og:title" content="How many more times will you see them?">
+<meta property="og:description" content="Type who, their age and how often you meet, and see the number of times left, one dot each. Sapiens makes the next one count.">
+<meta property="og:image" content="https://join.sapiens.bio/times-left/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The question: How many more times will you see them?">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How many more times will you see them?">
+<meta name="twitter:description" content="Type who, their age and how often you meet, and see the number of times left, one dot each. Sapiens makes the next one count.">
+<meta name="twitter:image" content="https://join.sapiens.bio/times-left/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one question, answered in a sentence you fill in, then the answer drawn as dots, one per time.
+   A single centred measure on every screen; the numbers are the only big things on the page. */
+:root {
+  --paper: #ffffff;
+  --ink: #121212;
+  --ink-2: #5c5c58;
+  --hair: #e4e4df;
+  --leaf: #1d8a4b;
+  --thirst: #a3622e;
+  --dot: #121212;
+  --field: #f4f4f1;
+  --f-display: "Bodoni Moda", "Didot", "Bodoni 72", "Times New Roman", serif;
+  --f-body: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --paper: #0e0e0d; --ink: #f1f1ec; --ink-2: #a5a59d; --hair: #2a2a27; --leaf: #6fd394; --thirst: #d69a63; --dot: #f1f1ec; --field: #1a1a18; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --paper: #0e0e0d; --ink: #f1f1ec; --ink-2: #a5a59d; --hair: #2a2a27; --leaf: #6fd394; --thirst: #d69a63; --dot: #f1f1ec; --field: #1a1a18; color-scheme: dark; }
+body { background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.shell { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.measure { max-width: 1080px; margin: 0 auto; }
+
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 20px; }
+.brand { display: inline-flex; gap: 9px; align-items: center; color: var(--ink); text-decoration: none; font-weight: 700; font-size: 17px; letter-spacing: .01em; -webkit-user-select: none; user-select: none; }
+.brand svg { width: 22px; height: 22px; }
+.top a.inv { color: var(--ink); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 0; border-bottom: 1px solid var(--ink); -webkit-user-select: none; user-select: none; }
+
+/* The question */
+.ask { padding-block: clamp(28px, 7vw, 90px) 18px; display: grid; gap: 34px; }
+.ask__q { min-width: 0; }
+@media (min-width: 1000px) {
+  .ask { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: end; gap: 40px; }
+  .ask h1 { font-size: clamp(54px, 6.3vw, 98px); }
+  .answer__row { justify-content: flex-end; text-align: right; flex-direction: column; align-items: flex-end; }
+}
+h1 { font-family: var(--f-display); font-style: italic; font-weight: 500; font-size: clamp(46px, 8.8vw, 118px); line-height: .98; letter-spacing: -.02em; margin: 0; max-width: 11.5em; text-wrap: balance; font-optical-sizing: auto; }
+.form { margin-top: clamp(28px, 4vw, 48px); font-size: clamp(22px, 3.1vw, 34px); line-height: 1.75; font-weight: 500; letter-spacing: -.01em; max-width: 24em; }
+.form label { display: contents; }
+.slot { font: inherit; color: var(--ink); background: var(--field); border: 0; border-bottom: 2px solid var(--ink); border-radius: 6px 6px 0 0; padding: 0 .3em; min-height: 44px; line-height: 1.3; vertical-align: baseline; cursor: pointer; }
+select.slot { -webkit-appearance: none; appearance: none; padding-right: 1.15em; background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(-45deg, transparent 50%, currentColor 50%); background-size: .3em .3em, .3em .3em; background-position: calc(100% - .5em) 58%, calc(100% - .2em) 58%; background-repeat: no-repeat; background-color: var(--field); }
+input.slot { width: 2.4em; text-align: center; -moz-appearance: textfield; cursor: text; }
+input.slot::-webkit-outer-spin-button, input.slot::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.slot:focus-visible { outline: 3px solid var(--leaf); outline-offset: 2px; }
+.assume { margin-top: 14px; font-size: 15px; color: var(--ink-2); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.assume input.slot { font-size: 16px; font-weight: 600; width: 3em; min-height: 36px; }
+
+/* The answer */
+.answer { padding-block: 26px 10px; border-top: 1px solid var(--hair); margin-top: 18px; }
+.answer__row { border-top: 1px solid var(--hair); padding-top: 26px; }
+@media (min-width: 1000px) { .answer__row { border-top: 0; padding-top: 0; } }
+.answer__row { display: flex; align-items: flex-end; gap: 6px 22px; flex-wrap: wrap; }
+.big { --big: clamp(130px, 31vw, 360px); font-family: var(--f-display); font-weight: 800; font-size: var(--big); line-height: .78; letter-spacing: -.045em; font-variant-numeric: lining-nums; margin: 0; padding-top: .06em; }
+@media (min-width: 1000px) { .big { --big: clamp(200px, 23vw, 340px); } }
+.big[data-len="3"] { font-size: calc(var(--big) * .74); }
+.big[data-len="5"] { font-size: calc(var(--big) * .52); }
+.big[data-len="6"], .big[data-len="7"] { font-size: calc(var(--big) * .44); }
+.big.is-words { font-size: clamp(76px, 15vw, 180px); letter-spacing: -.03em; font-style: italic; }
+.answer__unit { font-family: var(--f-display); font-style: italic; font-size: clamp(30px, 4.2vw, 52px); line-height: 1; margin: 0 0 .25em; }
+.answer__say { margin: 22px 0 0; font-size: clamp(19px, 2.2vw, 24px); max-width: 30em; text-wrap: pretty; }
+.answer__say strong { font-weight: 700; }
+.field-wrap { margin-top: 30px; }
+#dots { display: block; width: 100%; max-width: 100%; }
+.field-cap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 14px; color: var(--ink-2); margin-top: 12px; }
+.field-cap i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: -1px; margin-right: 6px; }
+.field-cap .k-next { background: var(--leaf); }
+.field-cap .k-left { background: var(--dot); }
+
+/* Gaps */
+.gaps { padding-block: clamp(70px, 10vw, 140px) 20px; }
+h2 { font-family: var(--f-display); font-weight: 500; font-size: clamp(38px, 6vw, 76px); line-height: 1; letter-spacing: -.02em; margin: 0 0 22px; max-width: 13em; text-wrap: balance; }
+h2 em { font-style: italic; }
+p.body { margin: 0 0 16px; max-width: 34em; color: var(--ink-2); text-wrap: pretty; }
+p.body strong { color: var(--ink); font-weight: 600; }
+.timeline { margin-top: 34px; overflow-x: auto; }
+.timeline svg { display: block; width: 100%; height: auto; }
+.timeline .t-compact { display: none; }
+@media (max-width: 640px) { .timeline .t-wide { display: none; } .timeline .t-compact { display: block; } }
+.t-axis { stroke: var(--hair); stroke-width: 2; }
+.t-dot { fill: var(--leaf); }
+.t-gap { stroke: var(--thirst); stroke-width: 2.5; stroke-dasharray: 3 7; stroke-linecap: round; fill: none; }
+.t-lab { fill: var(--ink-2); font: 500 13px var(--f-body); }
+.t-note { fill: var(--ink); font: 600 14px var(--f-body); }
+.t-thirst { fill: var(--thirst); }
+.t-hello { fill: var(--leaf); font: 700 14px var(--f-body); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .t-gap { animation: dash linear both; animation-timeline: view(); animation-range: entry 20% cover 45%; }
+  }
+}
+@keyframes dash { from { stroke-dashoffset: 120; } to { stroke-dashoffset: 0; } }
+
+/* Numbers */
+.numbers { padding-block: clamp(70px, 10vw, 140px) 10px; }
+.nums { list-style: none; padding: 0; margin: 34px 0 0; display: grid; gap: 0; }
+@media (min-width: 760px) { .nums { grid-template-columns: 1fr 1fr; column-gap: 48px; } }
+.num { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 20px; align-items: baseline; padding-block: 22px; border-top: 1px solid var(--hair); }
+.num b { font-family: var(--f-display); font-weight: 800; font-size: clamp(60px, 7vw, 88px); line-height: .8; letter-spacing: -.04em; text-align: right; font-variant-numeric: lining-nums; min-width: 1.85em; }
+.num b.zero { color: var(--leaf); }
+.num p { margin: 0; font-size: 18px; }
+.num p span { display: block; color: var(--ink-2); font-size: 16px; margin-top: 4px; }
+
+/* Together */
+.together { padding-block: clamp(70px, 10vw, 130px) 10px; }
+.pairs { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 22px 48px; }
+@media (min-width: 760px) { .pairs { grid-template-columns: 1fr 1fr; } }
+.pairs h3 { margin: 0 0 4px; font-size: 19px; font-weight: 700; }
+.pairs p { margin: 0; color: var(--ink-2); font-size: 16.5px; }
+
+/* Close */
+.close { padding-block: clamp(80px, 12vw, 160px) 50px; text-align: left; }
+.close h2 { font-size: clamp(52px, 9vw, 120px); font-style: italic; max-width: 9em; }
+.close p.body { font-size: 20px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 0 28px; border-radius: 999px; font: 600 17px/1 var(--f-body); text-decoration: none; border: 2px solid var(--ink); -webkit-user-select: none; user-select: none; transition: transform .15s; }
+.btn:hover { transform: translateY(-2px); }
+.btn--ink { background: var(--ink); color: var(--paper); }
+.btn--line { color: var(--ink); }
+.btn:focus-visible, .top a:focus-visible { outline: 3px solid var(--leaf); outline-offset: 3px; }
+
+.foot { border-top: 1px solid var(--hair); padding-block: 24px calc(40px + env(safe-area-inset-bottom, 0px)); display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14px; color: var(--ink-2); }
+.foot a { color: var(--ink); text-decoration: none; -webkit-user-select: none; user-select: none; }
+.foot p { flex-basis: 100%; margin: 4px 0 0; font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="measure">
+    <header class="top">
+      <a class="brand" href="https://sapiens.bio" referrerpolicy="no-referrer-when-downgrade" aria-label="Sapiens home">
+        <svg viewBox="1 2 20 20" aria-hidden="true"><path d="M10.9 20C6.9 19.7 4 18 4 15C4 11.6 6.3 8.4 10.4 6.4C13.8 4.6 16.4 3.9 19.6 2C20.5 4.9 21 7.4 21 9.9C21 15.4 16.8 19.7 10.9 20Z" fill="var(--leaf)"/><path d="M2 21C2 18.6 2.5 16.3 4.4 15.1C7.1 13.4 11.2 12.9 13.2 11.7" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Sapiens
+      </a>
+      <a class="inv" href="https://sapiens.bio" referrerpolicy="no-referrer-when-downgrade">I have an invitation</a>
+    </header>
+
+    <section class="ask" aria-labelledby="h1">
+      <div class="ask__q">
+      <h1 id="h1">How many more times will you see them?</h1>
+      <form class="form" id="form" autocomplete="off">
+        <label for="who">My</label>
+        <select class="slot" id="who" name="who">
+          <option value="mother" selected>mother</option>
+          <option value="father">father</option>
+          <option value="grandmother">grandmother</option>
+          <option value="grandfather">grandfather</option>
+          <option value="best friend">best friend</option>
+          <option value="oldest friend">oldest friend</option>
+          <option value="sister">sister</option>
+          <option value="brother">brother</option>
+          <option value="godchild">godchild</option>
+        </select>
+        <label for="age">is</label>
+        <input class="slot" id="age" name="age" type="number" inputmode="numeric" min="1" max="110" value="64" aria-label="Their age in years">
+        years old. We see each other
+        <select class="slot" id="often" name="often" aria-label="How often you see each other">
+          <option value="365">every day</option>
+          <option value="52">every week</option>
+          <option value="24">twice a month</option>
+          <option value="12">every month</option>
+          <option value="4" selected>every few months</option>
+          <option value="2">twice a year</option>
+          <option value="1">once a year</option>
+          <option value="0.5">every other year</option>
+        </select>.
+      </form>
+      <p class="assume"><label for="until">Counting until they turn</label> <input class="slot" id="until" type="number" inputmode="numeric" min="40" max="120" value="85" aria-label="Age the count runs to"> <span>at today's pace. Nobody knows the real number.</span></p>
+      </div>
+      <div class="answer__row" aria-live="polite">
+        <p class="big" id="big" data-len="2">84</p>
+        <p class="answer__unit" id="unit">more times.</p>
+      </div>
+    </section>
+
+    <section class="answer" aria-label="Your count, drawn">
+      <p class="answer__say" id="say">That's every coffee, call and Sunday lunch you have left with your mother, at this pace. <strong>Each dot below is one.</strong></p>
+      <div class="field-wrap">
+        <canvas id="dots" role="img" aria-label="84 dots, one for each time"></canvas>
+        <div class="field-cap"><span><i class="k-next"></i>the next one</span><span><i class="k-left"></i>the rest</span></div>
+      </div>
+    </section>
+
+    <section class="gaps" aria-labelledby="h-gaps">
+      <h2 id="h-gaps">The dots are not the problem. <em>The gaps are.</em></h2>
+      <p class="body">Nobody plans to skip a season. Life gets full, a month slides into five, and a dot you had quietly disappears. <strong>Sapiens watches the gaps for you.</strong></p>
+      <p class="body">Every Moment you log, a coffee, a call, a walk, restarts that person's clock. When a card goes quiet, the leaf on it turns brown and asks for water.</p>
+      <div class="timeline" data-allow-overflow>
+        <svg class="t-wide" viewBox="0 0 900 170" role="img" aria-label="A year of Moments with one long quiet gap from June to October, closed by a hello">
+          <line class="t-axis" x1="20" y1="90" x2="880" y2="90"/>
+          <g class="t-lab" text-anchor="middle">
+            <text x="40" y="140">Jan</text><text x="110" y="140">Feb</text><text x="180" y="140">Mar</text><text x="250" y="140">Apr</text><text x="320" y="140">May</text><text x="390" y="140">Jun</text><text x="460" y="140">Jul</text><text x="530" y="140">Aug</text><text x="600" y="140">Sep</text><text x="670" y="140">Oct</text><text x="740" y="140">Nov</text><text x="810" y="140">Dec</text>
+          </g>
+          <circle class="t-dot" cx="58" cy="90" r="9"/><circle class="t-dot" cx="150" cy="90" r="9"/><circle class="t-dot" cx="232" cy="90" r="9"/><circle class="t-dot" cx="300" cy="90" r="9"/><circle class="t-dot" cx="372" cy="90" r="9"/>
+          <path class="t-gap" d="M384 90 C 470 30, 560 30, 640 90"/>
+          <g transform="translate(494 22) scale(1.6)"><path class="t-thirst" d="M10.9 20C6.9 19.7 4 18 4 15C4 11.6 6.3 8.4 10.4 6.4C13.8 4.6 16.4 3.9 19.6 2C20.5 4.9 21 7.4 21 9.9C21 15.4 16.8 19.7 10.9 20Z" transform="translate(-12 -12)"/></g>
+          <text class="t-note" x="512" y="70" text-anchor="middle">four quiet months</text>
+          <circle class="t-dot" cx="652" cy="90" r="11"/>
+          <text class="t-hello" x="652" y="120" text-anchor="middle">hello</text>
+          <circle class="t-dot" cx="730" cy="90" r="9"/><circle class="t-dot" cx="800" cy="90" r="9"/><circle class="t-dot" cx="858" cy="90" r="9"/>
+        </svg>
+        <svg class="t-compact" viewBox="0 0 420 180" role="img" aria-label="Moments in April and May, four quiet months, then a hello in October">
+          <line class="t-axis" x1="10" y1="100" x2="410" y2="100"/>
+          <g class="t-lab" text-anchor="middle">
+            <text x="30" y="150">Apr</text><text x="80" y="150">May</text><text x="130" y="150">Jun</text><text x="180" y="150">Jul</text><text x="230" y="150">Aug</text><text x="280" y="150">Sep</text><text x="330" y="150">Oct</text><text x="380" y="150">Nov</text>
+          </g>
+          <circle class="t-dot" cx="38" cy="100" r="8"/><circle class="t-dot" cx="88" cy="100" r="8"/><circle class="t-dot" cx="124" cy="100" r="8"/>
+          <path class="t-gap" d="M136 100 C 190 34, 270 34, 322 100"/>
+          <g transform="translate(229 30) scale(1.3)"><path class="t-thirst" d="M10.9 20C6.9 19.7 4 18 4 15C4 11.6 6.3 8.4 10.4 6.4C13.8 4.6 16.4 3.9 19.6 2C20.5 4.9 21 7.4 21 9.9C21 15.4 16.8 19.7 10.9 20Z" transform="translate(-12 -12)"/></g>
+          <text class="t-note" x="229" y="84" text-anchor="middle">four quiet months</text>
+          <circle class="t-dot" cx="332" cy="100" r="10"/>
+          <text class="t-hello" x="332" y="128" text-anchor="middle">hello</text>
+          <circle class="t-dot" cx="372" cy="100" r="8"/><circle class="t-dot" cx="398" cy="100" r="8"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="numbers" aria-labelledby="h-nums">
+      <h2 id="h-nums">Sapiens, <em>counted.</em></h2>
+      <p class="body">A personal relationship manager that works on your own from the first day.</p>
+      <ul class="nums">
+        <li class="num"><b>1</b><p>living card per person<span>Face, birthday, family ties, the city they live in, the languages they speak. From Google in one click, or by hand.</span></p></li>
+        <li class="num"><b>4</b><p>Life Areas<span>Family, Social, Work and Services, so you see everyone around you on one map.</span></p></li>
+        <li class="num"><b>150</b><p>people a mind can keep<span>Robin Dunbar's number. Sapiens is built for them, not for followers.</span></p></li>
+        <li class="num"><b>2</b><p>reminders for a top pin<span>Pin someone who needs you. High priority rings your phone once, top priority twice.</span></p></li>
+        <li class="num"><b>1</b><p>click to take it all with you<span>Export everything. Deleting your account really deletes it.</span></p></li>
+        <li class="num"><b class="zero">0</b><p>ads, data sold, or AI trained on you<span>Other members never see your contacts.</span></p></li>
+      </ul>
+    </section>
+
+    <section class="together" aria-labelledby="h-together">
+      <h2 id="h-together">More dots, <em>once they join.</em></h2>
+      <p class="body">Sapiens is invitation-only. Friends who join wear their own face on your card.</p>
+      <ul class="pairs">
+        <li><h3>Message one to one</h3><p>A private thread with each member you are connected to.</p></li>
+        <li><h3>Write to exactly these people</h3><p>Your family, your students, this city. Or a broadcast to a whole circle.</p></li>
+        <li><h3>Plans with a who</h3><p>Events with a when and a where, checklists with a job per person.</p></li>
+        <li><h3>Introductions, asked first</h3><p>When two of your people should meet, Sapiens suggests it. Nothing goes out until you say yes.</p></li>
+      </ul>
+    </section>
+
+    <section class="close" aria-labelledby="h-close">
+      <h2 id="h-close">Make the next one count.</h2>
+      <p class="body" id="close-say">Your next time with your mother could be this week.</p>
+      <div class="ctas">
+        <a class="btn btn--ink" href="https://sapiens.bio/?waitlist" referrerpolicy="no-referrer-when-downgrade">Join the waiting list</a>
+        <a class="btn btn--line" href="https://sapiens.bio" referrerpolicy="no-referrer-when-downgrade">I have an invitation</a>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <a href="https://sapiens.bio/privacy" referrerpolicy="no-referrer-when-downgrade">Privacy</a>
+      <a href="https://sapiens.bio/terms" referrerpolicy="no-referrer-when-downgrade">Terms</a>
+      <p>The count multiplies the years until the age you chose by how often you meet. It is a mirror, not a forecast. 150: R. Dunbar, “How Many Friends Does One Person Need?” (2010).</p>
+    </footer>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const who = $("who"), age = $("age"), often = $("often"), until = $("until");
+  const big = $("big"), unit = $("unit"), say = $("say"), closeSay = $("close-say");
+  const canvas = $("dots"), ctx = canvas.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let shown = 84, n = 84, anim = 0;
+
+  const OFTEN_WORDS = { 365: "every day", 52: "every week", 24: "twice a month", 12: "every month", 4: "every few months", 2: "twice a year", 1: "once a year", 0.5: "every other year" };
+  const fmt = (v) => v.toLocaleString("en-US");
+  const color = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+  function compute() {
+    const a = Math.max(1, Math.min(110, parseInt(age.value, 10) || 0));
+    const u = Math.max(40, Math.min(120, parseInt(until.value, 10) || 85));
+    const f = Number(often.value);
+    return { a, u, f, left: Math.max(0, Math.round((u - a) * f)) };
+  }
+
+  function draw(count) {
+    const W = canvas.clientWidth || 1000;
+    const shownDots = Math.max(count, 1);
+    const maxH = W < 600 ? 420 : 520;
+    let pitch = Math.sqrt((W * maxH) / shownDots);
+    pitch = Math.max(3.2, Math.min(W < 600 ? 26 : 30, pitch));
+    const cols = Math.max(1, Math.floor(W / pitch));
+    const rows = Math.ceil(shownDots / cols);
+    const H = Math.ceil(rows * pitch);
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    canvas.style.height = H + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    const r = pitch * (pitch > 10 ? 0.36 : 0.34);
+    const ink = color("--dot"), leaf = color("--leaf");
+    if (count === 0) return;
+    let i = 0;
+    const per = reduce ? count : Math.max(12, Math.ceil(count / 36));
+    cancelAnimationFrame(anim);
+    const step = () => {
+      const end = Math.min(count, i + per);
+      for (; i < end; i++) {
+        const x = (i % cols) * pitch + pitch / 2, y = Math.floor(i / cols) * pitch + pitch / 2;
+        ctx.fillStyle = i === 0 ? leaf : ink;
+        ctx.beginPath(); ctx.arc(x, y, i === 0 ? r * 1.25 : r, 0, 6.283); ctx.fill();
+      }
+      if (i < count) anim = requestAnimationFrame(step);
+    };
+    step();
+  }
+
+  function tweenTo(target) {
+    big.dataset.len = String(fmt(target).length);
+    if (reduce) { big.textContent = fmt(target); shown = target; return; }
+    const from = shown, t0 = performance.now(), dur = 700;
+    const tick = (now) => {
+      const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      shown = Math.round(from + (target - from) * e);
+      big.textContent = fmt(shown);
+      big.dataset.len = String(fmt(target).length);
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  function update() {
+    const { a, u, f, left } = compute();
+    const person = `your ${who.value}`;
+    n = left;
+    if (left === 0) {
+      big.classList.add("is-words"); big.textContent = "Every one"; shown = 0;
+      unit.textContent = "is a gift.";
+      say.innerHTML = `${a} is past the age this count runs to. From here, every time with ${person} is one nobody planned on. <strong>Don't let any of them be ordinary.</strong>`;
+      closeSay.textContent = `Your next time with ${person} could be this week.`;
+    } else {
+      big.classList.remove("is-words");
+      tweenTo(left);
+      unit.textContent = left === 1 ? "more time." : "more times.";
+      const pace = OFTEN_WORDS[f] || "at this pace";
+      say.innerHTML = `That's every coffee, call and Sunday lunch you have left with ${person}, seeing each other ${pace}. <strong>Each dot below is one.</strong>`;
+      closeSay.textContent = left > 200 ? `You have time with ${person}. Sapiens makes sure it doesn't slip by.` : `Your next time with ${person} could be this week.`;
+    }
+    canvas.setAttribute("aria-label", left === 0 ? "No dots: every time from here is beyond the count" : `${fmt(left)} dots, one for each time`);
+    draw(left);
+  }
+
+  [who, often].forEach((el) => el.addEventListener("change", update));
+  [age, until].forEach((el) => el.addEventListener("input", update));
+  $("form").addEventListener("submit", (e) => e.preventDefault());
+  let rw = 0;
+  addEventListener("resize", () => { if (canvas.clientWidth !== rw) { rw = canvas.clientWidth; draw(n); } }, { passive: true });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => draw(n));
+  update();
+})();
+</script>
+</body>
+</html>
