@@ -1,6 +1,6 @@
 # join.sapiens.bio
 
-Five landing pages for [Sapiens](https://sapiens.bio), each its own idea, served by GitHub Pages:
+Six landing pages for [Sapiens](https://sapiens.bio), each its own idea, served by GitHub Pages:
 
 | Address | Idea |
 |---|---|
@@ -9,6 +9,7 @@ Five landing pages for [Sapiens](https://sapiens.bio), each its own idea, served
 | [join.sapiens.bio/times-left](https://join.sapiens.bio/times-left/) | Type who, their age and how often you meet: the times left, one dot each |
 | [join.sapiens.bio/catch-up](https://join.sapiens.bio/catch-up/) | «We should catch up soon», one chat thread over sixteen months |
 | [join.sapiens.bio/unfeed](https://join.sapiens.bio/unfeed/) | A loud feed falls apart under real physics, leaving only your people |
+| [join.sapiens.bio/text-first](https://join.sapiens.bio/text-first/) | Before you join anything, text someone you miss: a note you send yourself, and a leaf that greens when you do |
 
 The bare address and any unknown path go to sapiens.bio.
 
